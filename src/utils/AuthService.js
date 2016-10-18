@@ -9,11 +9,13 @@ export default class AuthService extends EventEmitter {
     this.auth0 = new Auth0({
       clientID: clientId,
       domain: domain,
-      callbackOnLocationHash: true
+      responseType: 'token',
+      callbackURL: `http://localhost:3000/callback`,
     });
 
     this.login = this.login.bind(this)
     this.signup = this.signup.bind(this)
+    this.magicLinkLogin = this.magicLinkLogin.bind(this)
   }
 
   login(params, onError){
@@ -22,6 +24,10 @@ export default class AuthService extends EventEmitter {
 
   signup(params, onError){
     this.auth0.signup(params, onError)
+  }
+
+  magicLinkLogin(params, onError){
+    this.auth0.requestMagicLink(params, onError)
   }
 
   parseHash(hash){

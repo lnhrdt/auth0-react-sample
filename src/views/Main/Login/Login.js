@@ -44,6 +44,14 @@ export class Login extends React.Component {
     });
   }
 
+  magicLinkLogin() {
+    this.props.auth.magicLinkLogin({
+      email: ReactDOM.findDOMNode(this.refs.email).value
+    }, function(err) {
+      if (err) alert("something went wrong: " + err.message);
+    });
+  }
+
   render() {
     return (
       <div className={styles.root}>
@@ -63,6 +71,10 @@ export class Login extends React.Component {
             <Button type="submit" bsStyle="primary">Sign In</Button>
             <Button onClick={this.signUp.bind(this)}>Sign Up</Button>
             <Button bsStyle="link" onClick={this.googleLogin.bind(this)}>Login with Google</Button>
+          </ButtonToolbar>
+
+          <ButtonToolbar>
+            <Button bsStyle="primary" onClick={this.magicLinkLogin.bind(this)}>Magic Link</Button>
           </ButtonToolbar>
         </Form>
       </div>

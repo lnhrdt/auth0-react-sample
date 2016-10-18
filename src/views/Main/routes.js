@@ -4,6 +4,7 @@ import AuthService from 'utils/AuthService'
 import Container from './Container'
 import Home from './Home/Home'
 import Login from './Login/Login'
+import Callback from './Callback/Callback'
 
 const auth = new AuthService(__AUTH0_CLIENT_ID__, __AUTH0_DOMAIN__);
 
@@ -25,6 +26,7 @@ export const makeMainRoutes = () => {
       <IndexRedirect to="/home" />
       <Route path="home" component={Home} onEnter={requireAuth} />
       <Route path="login" component={Login} />
+      <Route path="callback" component={Callback} />
       <Route path="access_token=:token" onEnter={parseAuthHash} /> //to prevent router errors
     </Route>
   )
